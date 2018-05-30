@@ -3,6 +3,7 @@ package programm.logic;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 import programm.gui.childpanel.map.MapPanel;
@@ -27,7 +28,7 @@ public class CellController{
 		setPositionRacer();
 	}
 
-	public void controlGrid() {
+	public void controlGrid() { // рисуем сетку
 		masMap = new int[WIDTH][WIDTH];
 		for (int i = 0; i < WIDTH; i++) {
 			for (int j = 0; j < WIDTH; j++) {
@@ -36,7 +37,7 @@ public class CellController{
 		}
 	}
 	
-	public void controlRacer() {
+	public void controlRacer() { // рисуем гонщиков
 		for (int i = 0; i < WIDTH; i++) {
 			for (int j = 0; j < WIDTH; j++) {
 				if(racer1.getCoordinateX() == i && racer1.getCoordinateY() == j) {
@@ -59,7 +60,7 @@ public class CellController{
 
 	}	
 	
-	public void controlBorder() {
+	public void controlBorder() { // рисуем границы
 		for (int i = 0; i < WIDTH; i++) {
 			for (int j = 0; j < WIDTH; j++) {
 				if(((i == (racer1.getCoordinateX() - 2) || i == (racer4.getCoordinateX() + 2)) && j >= ((WIDTH*2.4)/3)) || (i == racer1.getCoordinateX() - 1 || i == racer4.getCoordinateX() + 1)&& j <= ((WIDTH*2.4)/3)) {
@@ -69,8 +70,8 @@ public class CellController{
 		}
 	}
 	
-	public static void move() {
-		for (int i = 1; i < WIDTH; i++) { // проходим по массиву masMap
+	public static void move() { // движение гонщика
+		for (int i = 1; i < WIDTH; i++) {
 			for (int j = 1; j < WIDTH; j++) {
 				if(masMap[i][j] == 1) {
 					 masMap[i][j] = 0;
@@ -110,14 +111,70 @@ public class CellController{
 		}
 	}
 	
+	public static void win() {
+		Object[] options = { "Ок" };
+		for (int i = 0; i < WIDTH; i++) {
+			for (int j = 0; j < WIDTH; j++) {
+				if(masMap[i][0] == 1) {
+					int exit = JOptionPane.showOptionDialog(ChildFormPanel.mapPanel,
+			                   "Игрок 1 победил","Ski simulator",
+			                   JOptionPane.PLAIN_MESSAGE,
+			                   JOptionPane.QUESTION_MESSAGE,
+			                   null,
+			                   options,
+			                   options[0]);
+					if(exit == 0) {
+						System.exit(0);
+					}
+				}
+				if(masMap[i][0] == 2) {
+					int exit = JOptionPane.showOptionDialog(ChildFormPanel.mapPanel,
+			                   "Игрок 2 победил","Title",
+			                   JOptionPane.PLAIN_MESSAGE,
+			                   JOptionPane.QUESTION_MESSAGE,
+			                   null,
+			                   options,
+			                   options[0]);
+					if(exit == 0) {
+						System.exit(0);
+					}
+				}
+				if(masMap[i][0] == 3) {
+					int exit = JOptionPane.showOptionDialog(ChildFormPanel.mapPanel,
+			                   "Игрок 3 победил","Title",
+			                   JOptionPane.PLAIN_MESSAGE,
+			                   JOptionPane.QUESTION_MESSAGE,
+			                   null,
+			                   options,
+			                   options[0]);
+					if(exit == 0) {
+						System.exit(0);
+					}
+				}
+				if(masMap[i][0] == 4) {
+					int exit = JOptionPane.showOptionDialog(ChildFormPanel.mapPanel,
+			                   "Игрок 4 победил","Title",
+			                   JOptionPane.PLAIN_MESSAGE,
+			                   JOptionPane.QUESTION_MESSAGE,
+			                   null,
+			                   options,
+			                   options[0]);
+					if(exit == 0) {
+						System.exit(0);
+					}
+				}
+			}
+		}
+	}
 	
-	public void startModel() {
-		timer = new Timer(700, new ActionListener() {
+	public void startModel() { // запускаем таймер
+		timer = new Timer(500, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				map = ChildFormPanel.mapPanel;
+				map = ChildFormPanel.mapPanel; // отрисовываем на общей панели панель с картой
 				move();
+				win();
 				map.repaint();
 			}
 			  
@@ -125,7 +182,7 @@ public class CellController{
 	    );
 		timer.start();
 	}
-	public static void pauseModel() {
+	public static void pauseModel() { // останвливаем таймер
 		timer.stop();
 	}
 	
