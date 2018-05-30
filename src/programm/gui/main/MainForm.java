@@ -2,15 +2,23 @@ package programm.gui.main;
 
 import javax.swing.*;
 
+import programm.gui.mainpanel.MainFormPanel;
+
 public class MainForm extends JFrame {
 	/**
 	 * 
 	 */
+	
 	private static final long serialVersionUID = 1L;
 
+	private JPanel panelOption;
+	
+	private MainFormPanel mainFormPanel;
+	
 	public MainForm(){
 		setupView();
-		setupPanel();
+		setupGroupPanels();
+		setupViewPanel();
 		setVisible(true);
 	}
 	
@@ -26,7 +34,14 @@ public class MainForm extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
-	private void setupPanel() {
-		add(new MainFormPanel());
+	private void setupGroupPanels() {
+		panelOption = new JPanel();
+		panelOption.setLayout(new BoxLayout(panelOption, BoxLayout.Y_AXIS));
+		add(panelOption);
+	}
+	
+	private void setupViewPanel() {
+		mainFormPanel = new MainFormPanel();
+		panelOption.add(mainFormPanel);
 	}
 }
