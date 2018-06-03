@@ -1,6 +1,7 @@
-package runnable;
+package pro.sidorov.racer.runnable;
 
-import programm.gui.main.MainForm;
+
+import pro.sidorov.racer.gui.main.MainForm;
 
 public class Runnable {
 	public static void main(String[] args) {

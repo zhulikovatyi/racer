@@ -1,8 +1,8 @@
-package programm.gui.main;
+package pro.sidorov.racer.gui.main;
 
 import javax.swing.*;
 
-import programm.gui.mainpanel.MainFormPanel;
+import pro.sidorov.racer.gui.mainpanel.MainFormPanel;
 
 public class MainForm extends JFrame {
 	/**

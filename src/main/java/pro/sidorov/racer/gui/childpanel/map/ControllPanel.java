@@ -1,43 +1,40 @@
-package programm.gui.childpanel.map;
+package pro.sidorov.racer.gui.childpanel.map;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JPanel;
+import javax.swing.*;
 
-import programm.logic.CellController;
+import pro.sidorov.racer.logic.ControllPanelListiner;
 
-public class ControllPanel extends JPanel{
+public class ControllPanel extends JPanel {
 	
 	/*
-	 * Кнопки
+	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	CellController control = new CellController();
+	ControllPanelListiner control = new ControllPanelListiner();
 	
-	private JButton startButton; // старт
-	private JButton pauseButton; // пауза
-//	private JButton resetButton; не понимаю как вернуть таймер, пока что в планах
+	private JButton startButton; // РЎС‚Р°СЂС‚
+	private JButton pauseButton; // РЎС‚РѕРї
+//	private JButton resetButton; РљРЅРѕРїРєРё РЅРµС‚ РЅРµ РІРёР¶Сѓ СЃРјС‹СЃР»Р°
 	
-	public ControllPanel(){ // декларирую методы
+	public ControllPanel(){ 
 		setupView();
 		setupButtons();
 		setVisible(true);
 	}
 	
-	private void setupView() { // отображение кнопок на экране
+	private void setupView() { 
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		setBackground(Color.RED);
+//		setBackground(Color.RED);
 	}
 	
-	private void setupButtons() {// кнопки
-		startButton = new JButton("Старт");
+	
+	private void setupButtons() {
+		startButton = new JButton("РЎС‚Р°СЂС‚");
 		startButton.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				control.startModel();
 				startButton.setEnabled(false);
@@ -47,12 +44,11 @@ public class ControllPanel extends JPanel{
 		});
 		add(startButton);
 		// PAUSE
-		pauseButton = new JButton("Пауза");
+		pauseButton = new JButton("РЎС‚РѕРї");
 		pauseButton.setEnabled(false);
 		pauseButton.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
-				CellController.pauseModel();
+				ControllPanelListiner.pauseModel();
 				startButton.setEnabled(true);
 				pauseButton.setEnabled(false);
 //				resetButton.setEnabled(true);
@@ -60,7 +56,7 @@ public class ControllPanel extends JPanel{
 		});
 		add(pauseButton);
 //		// RESET
-//		resetButton = new JButton("Рестарт");
+//		resetButton = new JButton("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 //		resetButton.setEnabled(false);
 //		resetButton.addActionListener(new ActionListener() {
 //			@Override

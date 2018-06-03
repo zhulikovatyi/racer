@@ -1,14 +1,9 @@
-package programm.gui.mainpanel;
+package pro.sidorov.racer.gui.mainpanel;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.*;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-
-import programm.gui.mainpanel.ViewMainPanel;
-import programm.gui.mainpanel.ViewRacerOption;
 
 public class MainFormPanel extends JPanel {
     

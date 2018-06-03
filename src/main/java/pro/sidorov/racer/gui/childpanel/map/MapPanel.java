@@ -1,48 +1,48 @@
-package programm.gui.childpanel.map;
+package pro.sidorov.racer.gui.childpanel.map;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
-import programm.logic.CellController;
+import pro.sidorov.racer.logic.CellController;
 
 public class MapPanel extends JPanel{
 
 	/*
-	 * Класс принимает значение методов из контроллера и отрисовывает графику
+	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
 	private CellController cellPane;
-	private final static int positionPanelX = 10; // позиция расположения "карты"
-	private final static int positionPanelY = 5;
+	private final static int positionPanelX = 10; // СЂР°СЃРїРѕР»РѕР¶РµРЅРёРµ СЃРµС‚РєРё РїРѕ X
+	private final static int positionPanelY = 5; // СЂР°СЃРїРѕР»РѕР¶РµРЅРёРµ СЃРµС‚РєРё РїРѕ Y
 		
 	public MapPanel() {
 		setBackground(Color.RED);
 		setupView();
 		setVisible(true);
 	}
+
 	@Override
 	public void paintComponent(Graphics g) {
+
 		super.paintComponent(g);
-		// рисуем рабочую область
+	   // Р РёСЃСѓРµРј СЂР°Р±РѕС‡СѓСЋ РѕР±Р»Р°СЃС‚СЊ
 		g.setColor(Color.WHITE);
 		g.fillRect(positionPanelX, positionPanelY, CellController.WIDTH*cellPane.CELL, CellController.WIDTH*cellPane.CELL);
-		// рисуем линии
 		
-		// по x
+		// Р РёСЃСѓРµРј СЃРµС‚РєСѓ РїРѕ X
 		for (int i = positionPanelX; i <= CellController.WIDTH*cellPane.CELL + positionPanelX; i+= cellPane.CELL){
 			g.setColor(Color.BLACK);
 			g.drawLine(positionPanelX,i - positionPanelY,CellController.WIDTH*cellPane.CELL+positionPanelX,i - positionPanelY);
 		}
 		
-		// по y
+		// Р РёСЃСѓРµРј СЃРµС‚РєСѓ РїРѕ Y
 		for (int i = positionPanelY; i <= CellController.WIDTH*cellPane.CELL + positionPanelY; i+= cellPane.CELL) {
 			g.setColor(Color.BLACK);
 			g.drawLine(positionPanelY + i,positionPanelY,i + positionPanelY,CellController.WIDTH*cellPane.CELL + positionPanelY);
 		}
-		// рисуем объекты
+		// Р РёСЃСѓРµРј РѕР±СЉРµРєС‚С‹ 0 - РїСѓС‚РѕРµ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРѕ / 1..4 Racer -1 / РіСЂР°РЅРёС†Р°
 		for(int i = 0; i < CellController.masMap.length; i++) {
 			for(int j = 0 ; j < CellController.masMap.length ; j++) {
 				
@@ -63,8 +63,6 @@ public class MapPanel extends JPanel{
 					g.setColor(Color.GREEN);
 					g.fillRect(positionPanelX+i*cellPane.CELL+1, positionPanelY+j*cellPane.CELL+1, cellPane.CELL-1, cellPane.CELL-1);
 				}
-				
-				// отрисовываем границы
 				if (CellController.masMap[i][j] == -1) {
 					g.setColor(Color.BLACK);
 					g.fillRect(positionPanelX+i*cellPane.CELL+1, positionPanelY+j*cellPane.CELL+1, cellPane.CELL-1, cellPane.CELL-1);

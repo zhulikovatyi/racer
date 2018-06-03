@@ -1,34 +1,28 @@
-package programm.logic;
+package pro.sidorov.racer.logic;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.*;
 
-import javax.swing.JOptionPane;
-import javax.swing.Timer;
+import pro.sidorov.racer.gui.childpanel.map.ChildFormPanel;
+import pro.sidorov.racer.model.Racer;
 
-import programm.gui.childpanel.map.MapPanel;
-import programm.gui.main.ChildFormPanel;
-import programm.model.Racer;
 
-public class CellController{
+public class CellController {
 	
 	public static int[][] masMap;
 	public final static int WIDTH = 120;
 	public final int CELL = 5;
 	
-	private static Timer timer;
-	private MapPanel map; 
 	
-	Racer racer1 = new Racer();
-	Racer racer2 = new Racer();
-	Racer racer3 = new Racer();
-	Racer racer4 = new Racer();
+	public static Racer racer1 = new Racer();
+	public static Racer racer2 = new Racer();
+	public static Racer racer3 = new Racer();
+	public static Racer racer4 = new Racer();
 	
 	public CellController(){
 		setPositionRacer();
 	}
 
-	public void controlGrid() { // рисуем сетку
+	public void controlGrid() { // Р—Р°РїРѕР»РЅСЏРµРј СЃРµС‚РєСѓ 0
 		masMap = new int[WIDTH][WIDTH];
 		for (int i = 0; i < WIDTH; i++) {
 			for (int j = 0; j < WIDTH; j++) {
@@ -37,7 +31,7 @@ public class CellController{
 		}
 	}
 	
-	public void controlRacer() { // рисуем гонщиков
+	public void controlRacer() { // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РїРѕР·РёС†РёРё Р°РіРµРЅС‚Р°Рј
 		for (int i = 0; i < WIDTH; i++) {
 			for (int j = 0; j < WIDTH; j++) {
 				if(racer1.getCoordinateX() == i && racer1.getCoordinateY() == j) {
@@ -60,7 +54,7 @@ public class CellController{
 
 	}	
 	
-	public void controlBorder() { // рисуем границы
+	public void controlBorder() { // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РїРѕР·РёС†РёРё РіСЂР°РЅРёС†Р°Рј
 		for (int i = 0; i < WIDTH; i++) {
 			for (int j = 0; j < WIDTH; j++) {
 				if(((i == (racer1.getCoordinateX() - 2) || i == (racer4.getCoordinateX() + 2)) && j >= ((WIDTH*2.4)/3)) || (i == racer1.getCoordinateX() - 1 || i == racer4.getCoordinateX() + 1)&& j <= ((WIDTH*2.4)/3)) {
@@ -70,54 +64,58 @@ public class CellController{
 		}
 	}
 	
-	public static void move() { // движение гонщика
-		for (int i = 1; i < WIDTH; i++) {
-			for (int j = 1; j < WIDTH; j++) {
-				if(masMap[i][j] == 1) {
-					 masMap[i][j] = 0;
-					 masMap[i][j - 1] = 1;
-				}
-				if(masMap[i][j] == 2) {
-					if( j <= 5 ) {
-						masMap[i][j - 1] = 2;
-						masMap[i][j] = 0;
-					}
-					else {
-						masMap[i][j - 2] = 2;
-						masMap[i][j] = 0;
-					}
-				}
-				if(masMap[i][j] == 3) {
-					if( j <= 6 ) {
-						masMap[i][j - 1] = 3;
-						masMap[i][j] = 0;
-					}
-					else {
-						masMap[i][j - 3] = 3;
-						masMap[i][j] = 0;
-					}
-				}
-				if(masMap[i][j] == 4) {
-                    if( j <= 7 ) {
-                    	masMap[i][j - 1] = 4;
-						masMap[i][j] = 0;
-					}
-                    else {
-                    	masMap[i][j - 4] = 4;
-						masMap[i][j] = 0;
-                    }
-				}
-			}
-		}
+	public void move() { // Р”РІРёР¶РµРЅРёРµ
+		racer1.move();
+		racer2.move();
+		racer3.move();
+		racer4.move();
+//		for (int i = 1; i < WIDTH; i++) {
+//			for (int j = 1; j < WIDTH; j++) {
+//				if(masMap[i][j] == 1) {
+//					 masMap[i][j] = 0;
+//					 masMap[i][j - 1] = 1;
+//				}
+//				if(masMap[i][j] == 2) {
+//					if( j <= 5 ) {
+//						masMap[i][j - 1] = 2;
+//						masMap[i][j] = 0;
+//					}
+//					else {
+//						masMap[i][j - 2] = 2;
+//						masMap[i][j] = 0;
+//					}
+//				}
+//				if(masMap[i][j] == 3) {
+//					if( j <= 6 ) {
+//						masMap[i][j - 1] = 3;
+//						masMap[i][j] = 0;
+//					}
+//					else {
+//						masMap[i][j - 3] = 3;
+//						masMap[i][j] = 0;
+//					}
+//				}
+//				if(masMap[i][j] == 4) {
+//                    if( j <= 7 ) {
+//                    	masMap[i][j - 1] = 4;
+//						masMap[i][j] = 0;
+//					}
+//                    else {
+//                    	masMap[i][j - 4] = 4;
+//						masMap[i][j] = 0;
+//                    }
+//				}
+//			}
+//		}
 	}
 	
-	public static void win() {
-		Object[] options = { "Ок" };
+	public void win() {
+		Object[] options = { "Р“РѕС‚РѕРІРѕ" };
 		for (int i = 0; i < WIDTH; i++) {
 			for (int j = 0; j < WIDTH; j++) {
 				if(masMap[i][0] == 1) {
 					int exit = JOptionPane.showOptionDialog(ChildFormPanel.mapPanel,
-			                   "Игрок 1 победил","Ski simulator",
+			                   "РџРѕР±РµРґРёР» РіРѕРЅС‰РёРє 1","Ski simulator",
 			                   JOptionPane.PLAIN_MESSAGE,
 			                   JOptionPane.QUESTION_MESSAGE,
 			                   null,
@@ -129,7 +127,7 @@ public class CellController{
 				}
 				if(masMap[i][0] == 2) {
 					int exit = JOptionPane.showOptionDialog(ChildFormPanel.mapPanel,
-			                   "Игрок 2 победил","Title",
+			                   "РџРѕР±РµРґРёР» РіРѕРЅС‰РёРє 2","Title",
 			                   JOptionPane.PLAIN_MESSAGE,
 			                   JOptionPane.QUESTION_MESSAGE,
 			                   null,
@@ -141,7 +139,7 @@ public class CellController{
 				}
 				if(masMap[i][0] == 3) {
 					int exit = JOptionPane.showOptionDialog(ChildFormPanel.mapPanel,
-			                   "Игрок 3 победил","Title",
+			                   "РџРѕР±РµРґРёР» РіРѕРЅС‰РёРє 3","Title",
 			                   JOptionPane.PLAIN_MESSAGE,
 			                   JOptionPane.QUESTION_MESSAGE,
 			                   null,
@@ -153,7 +151,7 @@ public class CellController{
 				}
 				if(masMap[i][0] == 4) {
 					int exit = JOptionPane.showOptionDialog(ChildFormPanel.mapPanel,
-			                   "Игрок 4 победил","Title",
+			                   "РџРѕР±РµРґРёР» РіРѕРЅС‰РёРє 4","Title",
 			                   JOptionPane.PLAIN_MESSAGE,
 			                   JOptionPane.QUESTION_MESSAGE,
 			                   null,
@@ -167,33 +165,11 @@ public class CellController{
 		}
 	}
 	
-	public void startModel() { // запускаем таймер
-		timer = new Timer(500, new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				map = ChildFormPanel.mapPanel; // отрисовываем на общей панели панель с картой
-				move();
-				win();
-				map.repaint();
-			}
-			  
-		}
-	    );
-		timer.start();
-	}
-	public static void pauseModel() { // останвливаем таймер
-		timer.stop();
-	}
-	
-	private void setPositionRacer() {
-		racer1.setCoordinate((WIDTH/2 - 1),WIDTH);
-		racer2.setCoordinate((WIDTH/2),WIDTH);
-		racer3.setCoordinate((WIDTH/2 + 1),WIDTH);
-		racer4.setCoordinate((WIDTH/2 + 2),WIDTH);
+	private void setPositionRacer() { // РљР»Р°СЃСЃ СЃРµР№С‡Р°СЃ РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµС‚ РіРѕРЅС‰РёРєРѕРІ
+		racer1.setOptions((WIDTH/2 - 1),WIDTH,5,5,"qwe");
+		racer2.setOptions((WIDTH/2),WIDTH,5,5,"erer");
+		racer3.setOptions((WIDTH/2 + 1),WIDTH,5,5,"xc");
+		racer4.setOptions((WIDTH/2 + 2),WIDTH,5,5,"hjg");
 		
 	}
-//	public static void restartModel() {
-//		timer.stop();
-//	}
 }

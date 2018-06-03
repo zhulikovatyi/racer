@@ -1,14 +1,9 @@
-package programm.gui.main;
+package pro.sidorov.racer.gui.childpanel.map;
 
-import java.awt.Color;
+import java.awt.*;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JPanel;
-
-import programm.gui.childpanel.map.ControllPanel;
-import programm.gui.childpanel.map.MapPanel;
-
+import javax.swing.*;
+import javax.swing.border.Border;
 
 
 public class ChildFormPanel extends JPanel{
@@ -18,39 +13,46 @@ public class ChildFormPanel extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public static JPanel leftGroupPanel;
 	private static JPanel centerGroupPanel;
 	public static JPanel rightGroupPanel;
 	
 	public static MapPanel mapPanel;
 	public static ControllPanel controllPanel;
 	
-	ChildFormPanel(){
+	public ChildFormPanel(){
 		setupView();
 		setupGroupPanels();
 		setupMapPanel();
 		setVisible(true);
 	}
-// ---------------------------------------Отображение------------------------------------------------------------
+// ---------------------------------------РќР°СЃС‚СЂРѕР№РєРё РІРёРґР°------------------------------------------------------------
 	private void setupView() {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 	}
 // ---------------------------------------------------------------------------------------------------------------
-// ------------------------------Группы панелей-------------------------------------------------------------------
+// ------------------------------РќР°СЃС‚СЂРѕР№РєРё РіСЂСѓРїРїС‹ РїР°РЅРµР»РµР№-------------------------------------------------------------------
 	private void setupGroupPanels() {
-		// центральная панель
 		centerGroupPanel = new JPanel();
 		centerGroupPanel.setLayout(new BoxLayout(centerGroupPanel, BoxLayout.X_AXIS));
 		add(centerGroupPanel);
+		rightGroupPanel = new JPanel();
+		rightGroupPanel.setLayout(new BoxLayout(rightGroupPanel, BoxLayout.Y_AXIS));
+		add(rightGroupPanel);
 	}
 // ---------------------------------------------------------------------------------------------------------------
-// Добавление классов отвечающих за определенную область (панель) групп панелей	
+// Р”РѕР±Р°РІР»РµРЅРёРµ РїР°РЅРµР»Рё	
 	private void setupMapPanel() {
+		Border etched = BorderFactory.createMatteBorder(10, 10, 10, 10, Color.BLUE);
+		centerGroupPanel.setBorder(etched);
+		
+		Border etched1 = BorderFactory.createMatteBorder(10, 10, 40, 10, Color.BLUE);
+		rightGroupPanel.setBorder(etched1);
+		
 		mapPanel = new MapPanel();
 		centerGroupPanel.add(mapPanel); 
 		
 		controllPanel = new ControllPanel();
-		centerGroupPanel.add(controllPanel);
+		rightGroupPanel.add(controllPanel);
 		centerGroupPanel.setBackground(Color.RED);
 	}
 }

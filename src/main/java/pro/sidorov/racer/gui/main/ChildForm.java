@@ -1,6 +1,8 @@
-package programm.gui.main;
+package pro.sidorov.racer.gui.main;
 
 import javax.swing.*;
+
+import pro.sidorov.racer.gui.childpanel.map.ChildFormPanel;
 
 public class ChildForm extends JFrame{
 	/**
@@ -22,7 +24,7 @@ public class ChildForm extends JFrame{
 		catch (Exception e) { 
 			e.printStackTrace();
 		}
-		setBounds( 100,100, 700, 650);
+		setBounds( 100,100, 740, 670);
 //		pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
